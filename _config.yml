@@ -12,6 +12,7 @@ description: > # the ">" symbol means to ignore newlines until "footer_text:"
 footer_text:
 keywords: computer science, law, Europe, network, interdisciplinary research, AI Act, digital regulation, CS&Law # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
+timezone: Europe/Amsterdam # used to evaluate which talks are still upcoming at build time
 icon: ⚖️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://cslaweurope.github.io # the base hostname & protocol for your site
@@ -146,6 +147,8 @@ collections:
     defaults:
       layout: post
     output: true
+  talks:
+    output: false # rendered inline by _includes/upcoming_talks.liquid; no per-talk page
   teachings:
     output: true
 
@@ -169,7 +172,10 @@ kramdown:
 # Includes & excludes
 include: ["_pages", "_scripts"]
 exclude:
+  - AGENTS.md
+  - ANALYTICS.md
   - bin/
+  - CLAUDE.md
   - CONTRIBUTING.md
   - CUSTOMIZE.md
   - Dockerfile
@@ -185,8 +191,12 @@ exclude:
   - package-lock.json
   - _pages/about_einstein.md
   - purgecss.config.js
+  - QUICKSTART.md
   - README.md
   - readme_preview/
+  - requirements.txt
+  - SEO.md
+  - TROUBLESHOOTING.md
   - vendor
 keep_files:
   - CNAME

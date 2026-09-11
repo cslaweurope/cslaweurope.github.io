@@ -26,7 +26,7 @@ The CS & Law Europe Network connects researchers and practitioners working at th
 
 ## Monthly activities
 
-We run monthly activities that alternate between different formats, taking place every last Friday of the month from 12.30–1.30 CET. Sign up below to get a calendar invite.
+We run monthly activities that alternate between different formats, taking place every last Friday of the month from 12:30–13:30 CET. Sign up below to get a calendar invite.
 
 <a href="{{ '/activities/' | relative_url }}" class="btn btn-secondary mt-1">View Activities →</a>
 

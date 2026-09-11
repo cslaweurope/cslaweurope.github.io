@@ -1,0 +1,75 @@
+{% comment %}
+  Renders the talks in _talks/ that have not happened yet.
+
+  A talk stays listed for the whole of its own day, and drops off on the next build
+  after that. Because the site is built by GitHub Actions, "today" is the build date --
+  the deploy workflow runs on a daily schedule so the list does not go stale.
+
+  Talk bodies are plain markdown: the collection is output: false, so Liquid tags in a
+  talk file are NOT evaluated. Keep links in this include, not in _talks/*.md.
+
+  Optional parameters:
+    limit  -- show at most this many talks (default: all upcoming ones)
+    title  -- heading text (default: "Next talks"); pass title="" to omit the heading
+{% endcomment %}
+
+{% assign today = site.time | date: '%Y%m%d' | plus: 0 %}
+{% assign talks = site.talks | sort: 'date' %}
+
+{% assign upcoming_count = 0 %}
+{% for talk in talks %}
+  {% assign talk_day = talk.date | date: '%Y%m%d' | plus: 0 %}
+  {% if talk_day >= today %}
+    {% assign upcoming_count = upcoming_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if include.limit %}
+  {% assign talk_limit = include.limit %}
+{% else %}
+  {% assign talk_limit = upcoming_count %}
+{% endif %}
+
+<div class="upcoming-talks">
+  {% unless include.title == '' %}
+    <h3>{{ include.title | default: 'Next talks' }}</h3>
+  {% endunless %}
+
+  {% if upcoming_count > 0 %}
+    {% assign shown = 0 %}
+    {% for talk in talks %}
+      {% assign talk_day = talk.date | date: '%Y%m%d' | plus: 0 %}
+      {% if talk_day >= today and shown < talk_limit %}
+        {% assign shown = shown | plus: 1 %}
+        <div class="card talk">
+          <div class="card-body">
+            <p class="talk-meta">
+              <i class="fa-solid fa-calendar fa-sm"></i>
+              {{ talk.date | date: '%A, %-d %B %Y' }}
+              {% if talk.time %}
+                &nbsp;&middot;&nbsp; {{ talk.time }}
+              {% endif %}
+              {% if talk.format %}
+                &nbsp;&middot;&nbsp; <span class="talk-format">{{ talk.format }}</span>
+              {% endif %}
+            </p>
+            <h4 class="card-title talk-title">{{ talk.title }}</h4>
+            {% if talk.speaker %}
+              <p class="talk-speaker">{{ talk.speaker }}</p>
+            {% endif %}
+            <div class="card-text">{{ talk.content | markdownify }}</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <p class="talk-join">
+      Meeting links and events are announced in the community Slack.
+      <a href="{{ '/#get-involved' | relative_url }}">Sign up</a> to receive the meeting link.
+    </p>
+  {% else %}
+    <p class="talk-empty">
+      No sessions are scheduled at the moment.
+      <a href="{{ '/#get-involved' | relative_url }}">Sign up</a> and we will add you to the Slack so you hear about the next one.
+    </p>
+  {% endif %}
+</div>

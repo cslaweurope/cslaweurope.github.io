@@ -259,3 +259,43 @@ ul.task-list input[type="checkbox"] {
 .d2h-diff-table {
   position: relative;
 }
+
+// Upcoming talks
+
+.upcoming-talks {
+  margin-bottom: 2rem;
+
+  .talk {
+    border: 1px solid var(--global-divider-color);
+    margin-bottom: 1rem;
+  }
+
+  .talk-meta {
+    color: var(--global-text-color-light);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .talk-format {
+    color: var(--global-theme-color);
+  }
+
+  .talk-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .talk-speaker {
+    color: var(--global-text-color-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-text > p:last-child {
+    margin-bottom: 0;
+  }
+
+  .talk-empty,
+  .talk-join {
+    color: var(--global-text-color-light);
+  }
+}

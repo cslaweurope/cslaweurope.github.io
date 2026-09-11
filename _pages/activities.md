@@ -2,9 +2,13 @@
 layout: page
 title: activities
 permalink: /activities/
-description: Activities organized by the CS&Law Europe Network. These monthly activities rotate and take place every last Friday of the month from 12.30-1.30 CET -- sign up with the Google sheet to get a calendar invite.
+description: Activities organized by the CS&Law Europe Network. These monthly activities rotate and take place every last Friday of the month from 12:30–13:30 CET -- sign up with the Google sheet to get a calendar invite.
 nav: true
 horizontal: false
+---
+
+{% include upcoming_talks.liquid %}
+
 ---
 
 ### Community learning calls
@@ -51,8 +55,6 @@ The Deep-Dive Debates are our bi-monthly high-intensity sessions designed to fos
 Do you have a topic that needs a Deep-Dive? Reach out to Konrad, Aurelia, or Lucas on Slack or use the channel deep-dive debates to propose a topic.
 
 ---
-
-
 
 ### Comparison: Which session is right for you?
 

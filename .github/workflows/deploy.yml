@@ -1,6 +1,9 @@
 name: Deploy site
 
 on:
+  schedule:
+    # Daily rebuild so the "Next talks" list drops sessions once they have happened.
+    - cron: "0 4 * * *"
   push:
     branches:
       - master
