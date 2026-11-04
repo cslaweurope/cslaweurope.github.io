@@ -1,0 +1,51 @@
+{% comment %}
+  Renders the talks in _talks/ that have already happened, newest first.
+
+  The counterpart of upcoming_talks.liquid: a talk moves here on the first build after
+  its own day. Talk bodies are plain markdown (Liquid is not evaluated), see the note
+  in upcoming_talks.liquid.
+
+  Optional parameters:
+    title  -- heading text (default: "Past sessions"); pass title="" to omit the heading
+{% endcomment %}
+
+{% assign today = site.time | date: '%Y%m%d' | plus: 0 %}
+{% assign talks = site.talks | sort: 'date' | reverse %}
+
+{% assign past_count = 0 %}
+{% for talk in talks %}
+  {% assign talk_day = talk.date | date: '%Y%m%d' | plus: 0 %}
+  {% if talk_day < today %}
+    {% assign past_count = past_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if past_count > 0 %}
+  <div class="past-talks">
+    {% unless include.title == '' %}
+      <h3>{{ include.title | default: 'Past sessions' }}</h3>
+    {% endunless %}
+
+    {% for talk in talks %}
+      {% assign talk_day = talk.date | date: '%Y%m%d' | plus: 0 %}
+      {% if talk_day < today %}
+        <div class="card talk">
+          <div class="card-body">
+            <p class="talk-meta">
+              <i class="fa-solid fa-calendar fa-sm"></i>
+              {{ talk.date | date: '%-d %B %Y' }}
+              {% if talk.format %}
+                &nbsp;&middot;&nbsp; <span class="talk-format">{{ talk.format }}</span>
+              {% endif %}
+            </p>
+            <h4 class="card-title talk-title">{{ talk.title }}</h4>
+            {% if talk.speaker %}
+              <p class="talk-speaker">{{ talk.speaker }}</p>
+            {% endif %}
+            <div class="card-text">{{ talk.content | markdownify }}</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

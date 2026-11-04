@@ -63,3 +63,7 @@ Do you have a topic that needs a Deep-Dive? Reach out to Konrad, Aurelia, or Luc
 | **Focus**       | Community projects and latest research outputs/ideas | Complex "unsolved" problems that require a deep-dive debate, taking into consideration different perspectives |
 | **Preparation** | None required                                        | Mandatory 2-page pre-read to prepare for each debate                                                          |
 | **Atmosphere**  | Supportive & exploratory                             | Rigorous & (politely) argumentative                                                                           |
+
+---
+
+{% include past_talks.liquid %}
